@@ -1,0 +1,48 @@
+#include <stdio.h>
+//预设库函数
+//clear()
+double add(double x,double y);
+double subtraction(double x,double y);
+double multiplication (double x,double y);
+double division(double x,double y);
+int main()
+{
+    char sign;
+	double number1=0.0;
+	double number2=0.0;
+	double end=0.0;
+	printf("以类似a+b的形式输入\n");
+    scanf("%lf%c%lf",&number1,&sign,&number2);
+	if(sign=='*')       printf("%lf\n",end=multiplication(number1,number2));
+	else if(sign=='/')       printf("%lf\n",end=division(number1,number2));
+	else if(sign=='-')       printf("%lf\n",end=subtraction(number1,number2));
+	else if(sign=='+')       printf("%lf\n",end=add(number1,number2));
+//这样只能实现一次1v1的运算，如何进行多次运算？ 怎么设计一个循环来解决连续输入问题？
+	printf("enter anything to keep calculator\n");
+while(1)
+ {
+	scanf("%c%lf",&sign,&number1);
+	if(sign=='*')       printf("%lf\n",end*=number1);
+	else if(sign=='/')       printf("%lf\n",end/=number1);
+    else if(sign=='-')       printf("%lf\n",end-=number1);
+    else if(sign=='+')       printf("%lf\n",end+=number1);
+ } 
+}
+//为啥这程序，乘除可以正常运行，加减却不行？ 答：系统可能吧-3当做一个double数了，所以导致没办法继续运算  现阶段没找到办法改进，先搁置处理。 
+//我需要自己构建一个数据库，用来存放自己编译的库函数。 
+double add(double x,double y)
+{
+	return(x*y);
+} 
+double subtraction(double x,double y)
+{
+	return(x-y);
+}
+double multiplication (double x,double y)
+{
+	return(x*y);
+}
+double division(double x,double y)
+{
+	return(x/y);
+}
