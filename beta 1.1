@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <function.h>
+#include <math.h>
+double subtraction(double x,double y);
+double multiplication (double x,double y);
+double division(double x,double y);
+double add(double x,double y);
+double pownext(double number1);
+//double square(double x); square平方 
+//double prescribing(double x); prescribing开方 
+//void clear();恢复所有数据至默认 
+int complementation(double x,double y);
+//既然是分开的模块化，电脑里面没有的运算符，应该自己去设定，这个思路是对的吗？ 
+double end=0.0;
+int main()
+{
+    int function=0;
+	char sign;
+	double number1=0.0;
+	double number2=0.0;	
+printf("                              ***************欢迎使用本计算器系统***************\n");
+printf("                              ******输入下方对应运算前的数字进入不同的系统******\n");
+printf("                              1.进入标准计算器模式\n");
+printf("                              2.进入解方程模式\n");            //字体什么的日后再调 
+//编辑器格式什么的日后再调，先满足别的运算。 
+scanf("%d",&function);
+
+if(function==1)  
+{
+	printf("您已进入标准计算器系统\n");
+	printf("请以类似a+b的形式输入\n");
+    scanf("%lf%c%lf",&number1,&sign,&number2);
+    // 无法实现只想输入一个数？无法在表达式之中随意穿插空格？ 
+    switch(sign)
+    {
+    	case '+': printf("%lf\n",end=add(number1,number2));             break;
+        case '-': printf("%lf\n",end=subtraction(number1,number2));     break;
+        case '*': printf("%lf\n",end=multiplication(number1,number2));  break;
+        case '/': printf("%lf\n",end=division(number1,number2));        break;
+       // case '^': printf("%lf\n",end=pow(number1,number2));             break; ^这个符号好像在C语言里面挺重要的，不能乱用 
+    }
+	printf("enter anything to keep calculator\n");
+	//if() clear; 用来清理计算完后的残渣 
+while(1)
+  {
+	//getchar()scanf函数%c前不加空格，就会从输入流里面读取第一个字符，也就是上次输入剩下的空格，导致sign赋值出错。 
+	scanf(" %c",&sign); 
+	scanf("%lf",&number1);
+	switch(sign)
+	{
+		case '+' : printf("%lf\n",end+=number1); break;
+		case '-' : printf("%lf\n",end-=number1); break;
+		case '*' : printf("%lf\n",end*=number1); break;
+		case '/' : printf("%lf\n",end/=number1); break;
+        case '^' : printf("%lf\n",end=pownext(number1));  break;    
+	}	
+  } 
+ }
+}
+//我这个程序在设计之初就没能给接下来的运算留有余地，需要重新构建框架。 
+double pownext(double x)
+{
+	return(end=pow(end,x));
+} 
